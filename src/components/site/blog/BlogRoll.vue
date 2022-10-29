@@ -12,21 +12,13 @@
   </div>
 </template>
 <script>
+import usePosts from "/src/components/site/blog/posts.js";
+import { onMounted } from "vue";
 export default {
-  data() {
-    return {
-      posts: [],
-    };
-  },
-  methods: {
-    fetchPosts() {
-      fetch("//jsonplaceholder.typicode.com/posts")
-        .then((response) => response.json())
-        .then((data) => (this.posts = data));
-    },
-  },
-  mounted() {
-    this.fetchPosts();
+  setup() {
+    const { posts, fetchPosts } = usePosts();
+    onMounted(() => fetchPosts());
+    return { posts };
   },
 };
 </script>
